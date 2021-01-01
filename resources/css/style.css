@@ -1,0 +1,15 @@
+.form-box,
+.capcha-form,
+.passcode-form {
+    height: 50rem;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.capcha-form,
+.passcode-form {
+    text-align: center;
+}
+
+
