@@ -125,6 +125,18 @@ if (isset($_GET['link'])) {
                     // $message = "<p id='seltxt' style='user-select:all'>$full </p>";
                     // $message .= "<a href='$full' class='btn btn-primary'>GO</a>";
 
+
+                    if(isset($_SESSION['userid'])){
+                        $userid = $_SESSION['userid'];
+                        $totalurl = (int) $_SESSION['totalurl'];
+                        $totalurl++;
+                        $_SESSION['totalurl'] = $totalurl;
+                        $userquery = "UPDATE users SET totalurl = '$totalurl' WHERE userid = '$userid';";
+
+                        mysqli_query($conn, $userquery);
+                    }
+
+
                     $_SESSION['wildcard']   = $shorted;
                     header("location:preview.php?link={$shorted}");
                     exit();

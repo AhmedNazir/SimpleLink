@@ -36,6 +36,7 @@ if ($fetchdata) {
     $useremail = $fetchdata['useremail'];
     $userpassword = $fetchdata['userpassword'];
     $usertype = $fetchdata['usertype'];
+    $totalurl = $fetchdata['totalurl'];
 } else {
     header("location:profile.php?error=error");
     exit();

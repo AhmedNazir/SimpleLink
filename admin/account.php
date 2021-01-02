@@ -5,6 +5,11 @@ if (!isset($_SESSION["userid"])) {
     exit();
 }
 
+if ($_SESSION["usertype"] != "admin") {
+    header("location:../user/dashboard.php");
+    exit();
+}
+
 require_once "../includes/db.inc.php";
 ?>
 
@@ -24,7 +29,7 @@ require_once "../includes/db.inc.php";
     <link rel="stylesheet" href="..\resources\css\style.css">
     <link rel="stylesheet" href="..\resources\css\responsive.css">
 
-    <title>Dashboard</title>
+    <title>Account</title>
 
 </head>
 
@@ -49,54 +54,32 @@ require_once "../includes/db.inc.php";
                     <a class="nav-link " href="../preview.php">Preview</a>
                 </li>
 
-                <?php
-                if (isset($_SESSION['userid'])) {
-                    echo '
-                    <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">Dashboard</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="dashboard.php">Dashboard</a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    ';
-                } else {
-                    echo '
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.php">Profile</a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="signup.php">Signup</a>
-                    </li>
-                    ';
-                }
+                <li class="nav-item">
+                    <a class="nav-link" href="../admin/dashboard.php">Admin</a>
+                </li>
 
-                if ($_SESSION['usertype'] == "admin") {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="../admin/dashboard.php">Admin</a>
-                        </li>';
-                }
-                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../edit.php">Edit</a>
                 </li>
-                
+
             </ul>
         </div>
     </nav>
 
-
-    <?php
-
-    if ($_SESSION['usertype'] == "admin") {
-        echo '
-            <div class="text-center mt-3">
-                <a href="../admin/dashboard.php" class="btn btn-primary col-3">ADMIN</a>
-            </div>
-            ';
-    }
-    ?>
+    <div class=" text-center mt-5">
+        <form action="includes/user.info.php" method="POST">
+            <input type="text" name="userid" placeholder="User ID/Email">
+            <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
 
 
 
@@ -104,14 +87,10 @@ require_once "../includes/db.inc.php";
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Custom Alias</th>
-                <th scope="col">Long URL</th>
-                <th scope="col">forcePreview</th>
-                <th scope="col">forceCapcha</th>
-                <th scope="col">Password</th>
-                <th scope="col">Submission</th>
-                <th scope="col">Total Click</th>
-                <th scope="col">EDIT</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">UID</th>
+                <th scope="col">Total URL</th>
+                <th scope="col">Info</th>
                 <th scope="col">Delete</th>
 
             </tr>
@@ -124,7 +103,7 @@ require_once "../includes/db.inc.php";
             }
 
             $userid = $_SESSION["userid"];
-            $query = "SELECT * FROM urls WHERE userid ='$userid';";
+            $query = "SELECT * FROM users WHERE usertype = 'user';";
 
             $result = mysqli_query($conn, $query);
             $row = mysqli_num_rows($result);
@@ -136,33 +115,22 @@ require_once "../includes/db.inc.php";
 
             $ii = ++$i;
             while (($entity = mysqli_fetch_assoc($result)) && ($i < $ii + 10)) {
-                if ($entity['preview']) {
-                    $preview = "Yes";
-                } else {
-                    $preview = "No";
-                }
-
-                if ($entity['capcha']) {
-                    $capcha = "Yes";
-                } else {
-                    $capcha = "No";
-                }
                 echo '
                 <tr>
                     <th scope="row">' . $i . '</th>
-                    <td>' . $entity['shorturl'] . '</td>
-                    <td><input type="text" value="' . $entity['longurl'] . '">
-                    <a href="' . $entity['longurl'] . '" class="btn btn-primary" target="_blank">GO</a>
-                    </td>
-                    <td>' . $preview . '</td>
-                    <td>' . $capcha . '</td>
-                    <td>' . $entity['passcode'] . '</td>
-                    <td>' . $entity['submission'] . '</td>
-                    <td>' . $entity['click'] . '</td>
-                    <td><a href="../edit.php?link=' . $entity['shorturl'] . '" class="btn btn-success">EDIT</a></td>
+                    <td>' . $entity['username'] . '</td>
+                    <td>' . $entity['userid'] . '</td>
+                    <td>' . $entity['totalurl'] . '</td>
                     <td>
-                        <form action="includes/dashboard.delete.inc.php" method="POST">
-                            <input type="hidden" name="shorturl" value="' . $entity['shorturl'] . '">
+                        <form action="includes/account.info.inc.php" method="POST">
+                            <input type="hidden" name="shorturl" value="' . $entity['userid'] . '">
+                            <input type="hidden" name="page" value="' . $page . '">
+                            <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-info"></i></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="includes/account.delete.inc.php" method="POST">
+                            <input type="hidden" name="shorturl" value="' . $entity['userid'] . '">
                             <input type="hidden" name="page" value="' . $page . '">
                             <button type="submit" name="submit" value="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

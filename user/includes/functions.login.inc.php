@@ -45,6 +45,8 @@ function login($conn, $userid, $userpassword)
             $_SESSION["username"] = $userdata["username"];
             $_SESSION["userpassword"] = $userdata["userpassword"];
             $_SESSION["usertype"] = $userdata["usertype"];
+            $_SESSION["totalurl"] = $userdata["totalurl"];
+
             header("location:../dashboard.php");
             exit();
         } else {

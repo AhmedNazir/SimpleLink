@@ -61,6 +61,7 @@ require_once "includes/profile.inc.php";
         email : <input type="text" name="useremail" value="<?php echo $useremail ?>" disabled><br>
         id : <input type="text" name="userid" value="<?php echo $userid ?> " disabled><br>
         type : <input type="text" name="usertype" value="<?php echo $usertype ?>" disabled><br>
+        type : <input type="text" name="totalurl" value="<?php echo $totalurl ?>" disabled><br>
     </div>
 
     <div class="text-center mt-5">

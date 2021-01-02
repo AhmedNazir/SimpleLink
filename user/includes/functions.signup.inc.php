@@ -67,7 +67,7 @@ function useridExist($conn, $userid, $useremail)
 
 function createAccount($conn, $username, $useremail, $userid, $userpassword)
 {
-    $usertype = "customer";
+    $usertype = "user";
     $query = "INSERT INTO users (username, useremail, userid, userpassword, usertype) VALUES (?,?,?,?,?);";
 
     $stmt = mysqli_stmt_init($conn);
