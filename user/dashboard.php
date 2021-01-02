@@ -81,7 +81,7 @@ require_once "../includes/db.inc.php";
                 <li class="nav-item">
                     <a class="nav-link" href="../edit.php">Edit</a>
                 </li>
-                
+
             </ul>
         </div>
     </nav>
@@ -99,12 +99,51 @@ require_once "../includes/db.inc.php";
     ?>
 
 
+    <div class=" text-center mt-5">
+        <form action="" method="POST">
+            <input type="text" name="shorturl" placeholder="Custom Alias">
+            <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+
+    <?php
+    $page = 0;
+    if (isset($_GET["page"])) {
+        $page = (int) $_GET["page"];
+    }
+
+    $userid = $_SESSION["userid"];
+
+    if (isset($_POST['submit']) && empty($_POST['shorturl']) == false) {
+        $shorturl = $_POST['shorturl'];
+        $query = "SELECT * FROM urls WHERE shorturl = '$shorturl' AND userid = '$userid';";
+        $page = 0;
+    } else {
+        $query = "SELECT * FROM  urls WHERE userid = '$userid';";
+    }
+
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_num_rows($result);
+
+    if (!$row) {
+        echo '<div class="alert alert-danger text-center" role="alert">No URL Exists</div>';
+    }
+
+    $i = 0;
+    for (; $i < $page * 10; $i++) {
+        $entity = mysqli_fetch_assoc($result);
+    }
+
+    ?>
+
 
     <table class="table table-striped mt-5">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Custom Alias</th>
+                <th scope="col">UserID</th>
                 <th scope="col">Long URL</th>
                 <th scope="col">forcePreview</th>
                 <th scope="col">forceCapcha</th>
@@ -113,27 +152,10 @@ require_once "../includes/db.inc.php";
                 <th scope="col">Total Click</th>
                 <th scope="col">EDIT</th>
                 <th scope="col">Delete</th>
-
             </tr>
         </thead>
         <tbody>
             <?php
-            $page = 0;
-            if (isset($_GET["page"])) {
-                $page = (int) $_GET["page"];
-            }
-
-            $userid = $_SESSION["userid"];
-            $query = "SELECT * FROM urls WHERE userid ='$userid';";
-
-            $result = mysqli_query($conn, $query);
-            $row = mysqli_num_rows($result);
-
-            $i = 0;
-            for (; $i < $page * 10; $i++) {
-                $entity = mysqli_fetch_assoc($result);
-            }
-
             $ii = ++$i;
             while (($entity = mysqli_fetch_assoc($result)) && ($i < $ii + 10)) {
                 if ($entity['preview']) {
@@ -147,10 +169,12 @@ require_once "../includes/db.inc.php";
                 } else {
                     $capcha = "No";
                 }
+
                 echo '
                 <tr>
                     <th scope="row">' . $i . '</th>
                     <td>' . $entity['shorturl'] . '</td>
+                    <td>' . $entity['userid'] . '</td>
                     <td><input type="text" value="' . $entity['longurl'] . '">
                     <a href="' . $entity['longurl'] . '" class="btn btn-primary" target="_blank">GO</a>
                     </td>
@@ -159,7 +183,14 @@ require_once "../includes/db.inc.php";
                     <td>' . $entity['passcode'] . '</td>
                     <td>' . $entity['submission'] . '</td>
                     <td>' . $entity['click'] . '</td>
-                    <td><a href="../edit.php?link=' . $entity['shorturl'] . '" class="btn btn-success">EDIT</a></td>
+                    <td>
+                    <form action="url.php" method="POST">
+                        <input type="hidden" name="shorturl" value="' . $entity['shorturl'] . '">
+                        <input type="hidden" name="page" value="' . $page . '">
+                        <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-info"></i></button>
+                    </form>
+                    </td>
+
                     <td>
                         <form action="includes/dashboard.delete.inc.php" method="POST">
                             <input type="hidden" name="shorturl" value="' . $entity['shorturl'] . '">
@@ -187,7 +218,7 @@ require_once "../includes/db.inc.php";
     echo "<b>page : </b>";
     for ($i = 0; $i <= $row; $i++) {
         echo '
-            <b><a href="dashboard.php?page=' . $i . '">[' . $i . ']</a> </b>
+            <b><a href="url.php?page=' . $i . '">[' . $i . ']</a> </b>
             ';
     }
 
