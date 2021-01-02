@@ -55,19 +55,24 @@ require_once "../includes/db.inc.php";
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="dashboard.php">Dashboard</a>
+                    <a class="nav-link " href="dashboard.php">Admin</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
+                    <a class="nav-link " href="url.php">URL</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="account.php">Account</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../admin/dashboard.php">Admin</a>
+                    <a class="nav-link " href="../user/dashboard.php">User Section</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../edit.php">Edit</a>
+                    <a class="nav-link" href="../user/logout.php">Logout</a>
                 </li>
 
             </ul>
@@ -75,7 +80,7 @@ require_once "../includes/db.inc.php";
     </nav>
 
     <div class=" text-center mt-5">
-        <form action="includes/user.info.php" method="POST">
+        <form action="" method="POST">
             <input type="text" name="userid" placeholder="User ID/Email">
             <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
         </form>
@@ -83,54 +88,63 @@ require_once "../includes/db.inc.php";
 
 
 
+    <?php
+    $page = 0;
+    if (isset($_GET["page"])) {
+        $page = (int) $_GET["page"];
+    }
+
+    $userid = $_SESSION["userid"];
+
+    if (isset($_POST['submit']) && empty($_POST['userid']) == false) {
+        $page = 0;
+        $userid = $_POST['userid'];
+        $query = "SELECT * FROM users WHERE userid = '$userid' OR useremail = '$userid';";
+    } else {
+        $query = "SELECT * FROM users WHERE usertype = 'user';";
+    }
+
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_num_rows($result);
+
+    if (!$row) {
+        echo '<div class="alert alert-danger text-center" role="alert">No account Exists</div>';
+    }
+
+    $i = 0;
+    for (; $i < $page * 10; $i++) {
+        $entity = mysqli_fetch_assoc($result);
+    }
+
+    ?>
+
+
     <table class="table table-striped mt-5">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Full Name</th>
                 <th scope="col">UID</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
                 <th scope="col">Total URL</th>
-                <th scope="col">Info</th>
                 <th scope="col">Delete</th>
 
             </tr>
         </thead>
         <tbody>
             <?php
-            $page = 0;
-            if (isset($_GET["page"])) {
-                $page = (int) $_GET["page"];
-            }
-
-            $userid = $_SESSION["userid"];
-            $query = "SELECT * FROM users WHERE usertype = 'user';";
-
-            $result = mysqli_query($conn, $query);
-            $row = mysqli_num_rows($result);
-
-            $i = 0;
-            for (; $i < $page * 10; $i++) {
-                $entity = mysqli_fetch_assoc($result);
-            }
-
             $ii = ++$i;
             while (($entity = mysqli_fetch_assoc($result)) && ($i < $ii + 10)) {
                 echo '
                 <tr>
                     <th scope="row">' . $i . '</th>
-                    <td>' . $entity['username'] . '</td>
                     <td>' . $entity['userid'] . '</td>
+                    <td>' . $entity['username'] . '</td>
+                    <td>' . $entity['useremail'] . '</td>
                     <td>' . $entity['totalurl'] . '</td>
                     <td>
-                        <form action="includes/account.info.inc.php" method="POST">
-                            <input type="hidden" name="shorturl" value="' . $entity['userid'] . '">
-                            <input type="hidden" name="page" value="' . $page . '">
-                            <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fas fa-info"></i></button>
-                        </form>
-                    </td>
-                    <td>
                         <form action="includes/account.delete.inc.php" method="POST">
-                            <input type="hidden" name="shorturl" value="' . $entity['userid'] . '">
+                            <input type="hidden" name="userid" value="' . $entity['userid'] . '">
                             <input type="hidden" name="page" value="' . $page . '">
                             <button type="submit" name="submit" value="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

@@ -15,7 +15,7 @@ session_start();
     <link rel="stylesheet" href="resources\css\style.css">
     <link rel="stylesheet" href="resources\css\responsive.css">
 
-    <title>Preview</title>
+    <title>Edit</title>
 </head>
 
 
@@ -52,7 +52,7 @@ session_start();
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="user/profile.php">'.$_SESSION["username"].'</a>
+                        <a class="nav-link" href="user/profile.php">' . $_SESSION["username"] . '</a>
                     </li>
                     ';
                 } else {
@@ -66,9 +66,34 @@ session_start();
                     </li>
                     ';
                 }
-
                 ?>
             </ul>
         </div>
     </nav>
 
+    <?php
+    $shorturl = "";
+    if (isset($_GET['link']) && !empty($_GET['link'])) {
+        $shorturl = $_GET['link'];
+        header("location:includes/edit.code.inc.php?link=$shorturl");
+        exit();
+    }
+
+    if (isset($_GET['error']) && $_GET['error'] == "urlnotexists") {
+        echo '
+            <div class="alert alert-danger text-center" role="alert">
+            URL Not Exists
+            </div>
+            ';
+    }
+
+    ?>
+
+
+    <form action="includes/edit.code.inc.php" method="GET" class="text-center mt-5">
+        <input type="text" name="link">
+        <button type="submit">Edit</button>
+    </form>
+</body>
+
+</html>

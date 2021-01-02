@@ -1,19 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION["userid"])) {
-    header("location:..\index.php");
-    exit();
-}
-
-if ($_SESSION["usertype"] != "admin") {
-    header("location:../user/dashboard.php");
-    exit();
-}
-
-require_once "../includes/db.inc.php";
+require_once "includes/db.inc.php";
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,14 +11,12 @@ require_once "../includes/db.inc.php";
 
     <!-- vendor -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="icon" type="image/png" href="..\resources\img\favicon.png" />
+    <link rel="icon" type="image/png" href="resources\img\favicon.png" />
     <!-- Resources -->
-    <link rel="stylesheet" href="..\resources\css\style.css">
-    <link rel="stylesheet" href="..\resources\css\responsive.css">
+    <link rel="stylesheet" href="resources\css\style.css">
+    <link rel="stylesheet" href="resources\css\responsive.css">
 
-    <title>Account</title>
-
+    <title>Preview</title>
 </head>
 
 
@@ -41,37 +27,48 @@ require_once "../includes/db.inc.php";
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="..\index.php">
-                <img src="..\resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
+            <a class="navbar-brand mr-auto" href="index.php">
+                <img src="resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="../index.php">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="preview.php">Preview</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="dashboard.php">Admin</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link " href="url.php">URL</a>
+                    <a class="nav-link" href="edit.php">Edit</a>
                 </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link " href="account.php">Account</a>
-                </li>
+                <?php
+                if (isset($_SESSION['userid'])) {
+                    echo '
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/dashboard.php">Dashboard</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " href="../user/dashboard.php">User Section</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/profile.php">' . $_SESSION["username"] . '</a>
+                    </li>
+                    ';
+                } else {
+                    echo '
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/login.php">Login</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../user/logout.php">Logout</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/signup.php">Signup</a>
+                    </li>
+                    ';
+                }
 
+                ?>
             </ul>
         </div>
     </nav>

@@ -114,7 +114,12 @@ if (isset($_GET['link'])) {
             }
 
             if ($flag) {
-                $query = "INSERT INTO urls ( longurl, shorturl, creator, edit, preview, capcha, passcode) VALUES ( '$url', '$shorted', '$creator', '$edit', '$preview', '$capcha', '$passcode')";
+
+                $userid = "";
+                if (isset($_SESSION['userid'])) {
+                    $userid = $_SESSION['userid'];
+                }
+                $query = "INSERT INTO urls ( longurl, shorturl, creator, userid, edit, preview, capcha, passcode) VALUES ( '$url', '$shorted', '$creator', '$userid','$edit', '$preview', '$capcha', '$passcode')";
 
 
                 $result = mysqli_query($conn, $query);
@@ -126,7 +131,7 @@ if (isset($_GET['link'])) {
                     // $message .= "<a href='$full' class='btn btn-primary'>GO</a>";
 
 
-                    if(isset($_SESSION['userid'])){
+                    if (isset($_SESSION['userid'])) {
                         $userid = $_SESSION['userid'];
                         $totalurl = (int) $_SESSION['totalurl'];
                         $totalurl++;
