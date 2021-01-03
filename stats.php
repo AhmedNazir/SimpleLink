@@ -16,7 +16,7 @@ require_once "includes/db.inc.php";
     <link rel="stylesheet" href="resources\css\style.css">
     <link rel="stylesheet" href="resources\css\responsive.css">
 
-    <title>Preview</title>
+    <title>Stats</title>
 </head>
 
 
