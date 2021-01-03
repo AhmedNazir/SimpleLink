@@ -34,7 +34,7 @@ CREATE TABLE `urls` (
   `creator` varchar(32) NOT NULL,
   `edit` varchar(8) NOT NULL,
   `preview` tinyint(1) NOT NULL DEFAULT 0,
-  `capcha` tinyint(1) NOT NULL DEFAULT 0,
+  `captcha` tinyint(1) NOT NULL DEFAULT 0,
   `passcode` varchar(8) DEFAULT NULL,
   `submission` date NOT NULL,
   `expire` date DEFAULT NULL,

@@ -162,8 +162,8 @@ $_SESSION['edit'][$data['shorturl']] = $data;
 
 
         <div class="mt-3 form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="capcha" value="1" name="capcha" <?php echo $data['capcha'] ? 'checked' : '' ?>>
-            <label class="form-check-label" for="capcha">Force Capcha</label>
+            <input type="checkbox" class="form-check-input" id="captcha" value="1" name="captcha" <?php echo $data['captcha'] ? 'checked' : '' ?>>
+            <label class="form-check-label" for="captcha">Force captcha</label>
         </div>
 
 

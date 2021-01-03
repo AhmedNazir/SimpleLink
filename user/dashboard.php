@@ -147,7 +147,7 @@ require_once "../includes/db.inc.php";
                 <th scope="col">UserID</th>
                 <th scope="col">Long URL</th>
                 <th scope="col">forcePreview</th>
-                <th scope="col">forceCapcha</th>
+                <th scope="col">forcecaptcha</th>
                 <th scope="col">Password</th>
                 <th scope="col">Submission</th>
                 <th scope="col">Total Click</th>
@@ -165,10 +165,10 @@ require_once "../includes/db.inc.php";
                     $preview = "No";
                 }
 
-                if ($entity['capcha']) {
-                    $capcha = "Yes";
+                if ($entity['captcha']) {
+                    $captcha = "Yes";
                 } else {
-                    $capcha = "No";
+                    $captcha = "No";
                 }
 
                 echo '
@@ -180,7 +180,7 @@ require_once "../includes/db.inc.php";
                     <a href="' . $entity['longurl'] . '" class="btn btn-primary" target="_blank">GO</a>
                     </td>
                     <td>' . $preview . '</td>
-                    <td>' . $capcha . '</td>
+                    <td>' . $captcha . '</td>
                     <td>' . $entity['passcode'] . '</td>
                     <td>' . $entity['submission'] . '</td>
                     <td>' . $entity['click'] . '</td>

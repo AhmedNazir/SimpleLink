@@ -6,7 +6,7 @@ if (!isset($_SESSION[$_GET['link']])) {
     exit();
 }
 
-if ((int)$_SESSION[$_GET['link']]['capcha'] == 0) {
+if ((int)$_SESSION[$_GET['link']]['captcha'] == 0) {
     header("location:index.php?link={$_GET['link']}");
     exit();
 }
@@ -28,7 +28,7 @@ if ((int)$_SESSION[$_GET['link']]['capcha'] == 0) {
     <link rel="stylesheet" href="resources\css\style.css">
     <link rel="stylesheet" href="resources\css\responsive.css">
 
-    <title>Verify</title>
+    <title>Captcha</title>
 </head>
 
 <body>

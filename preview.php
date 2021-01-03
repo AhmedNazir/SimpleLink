@@ -11,7 +11,7 @@ $shorturl = '';
 $custom = '';
 $creator = '';
 $preview = '';
-$capcha = '';
+$captcha = '';
 $time = '';
 $click = '';
 $hiddenvisit = '';
@@ -38,7 +38,7 @@ if (!empty($_GET['link'])) {
         $shorturl = $website . $custom;
         $creator = $arr['creator'];
         $preview = $arr['preview'];
-        $capcha = $arr['capcha'];
+        $captcha = $arr['captcha'];
         $time = $arr['submission'];
         $click = $arr['click'];
         $expire = $arr['expire'];
@@ -57,7 +57,7 @@ if (!empty($_GET['link'])) {
                 $password = $arr['passcode'];
         }
 
-        // $_SESSION['capcha'] = "";
+        // $_SESSION['captcha'] = "";
     } else {
         $flag = "";
         $message = 'Link does not exit';
@@ -226,8 +226,8 @@ if (!empty($_GET['link'])) {
 
 
         <div class="mb-3 form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="forceCapcha" value="1" name="isCapcha" <?php echo $capcha ? 'checked' : '' ?> readonly>
-            <label class="form-check-label" for="forceCapcha">Force Capcha</label>
+            <input type="checkbox" class="form-check-input" id="forcecaptcha" value="1" name="iscaptcha" <?php echo $captcha ? 'checked' : '' ?> readonly>
+            <label class="form-check-label" for="forcecaptcha">Force captcha</label>
         </div>
 
         <div class="mb-3 form-check form-check-inline">

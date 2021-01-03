@@ -135,8 +135,8 @@
 
             <div class="row">
                 <div>
-                    <input type="checkbox" id="forceCapcha" value="1" name="isCapcha">
-                    <label for="forceCapcha">Force Capcha</label>
+                    <input type="checkbox" id="forcecaptcha" value="1" name="iscaptcha">
+                    <label for="forcecaptcha">Force captcha</label>
                 </div>
             </div>
 
@@ -217,8 +217,8 @@
 
 
             <div class="mt-3 form-check form-check-inline">
-                <input type="checkbox" class="form-check-input" id="capcha" value="1" name="isCapcha" <?php echo $capcha ? 'checked' : '' ?>>
-                <label class="form-check-label" for="capcha">Force Capcha</label>
+                <input type="checkbox" class="form-check-input" id="captcha" value="1" name="iscaptcha" <?php echo $captcha ? 'checked' : '' ?>>
+                <label class="form-check-label" for="captcha">Force captcha</label>
             </div>
 
             <div class="mt-3 form-check form-check-inline">

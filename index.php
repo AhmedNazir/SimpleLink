@@ -31,8 +31,8 @@ if (isset($_GET['link'])) {
         if ($arr['passcode']) {
             header("location:password.php?link={$link}");
             exit();
-        } else if ($arr['capcha']) {
-            header("location:capcha.php?link={$link}");
+        } else if ($arr['captcha']) {
+            header("location:captcha.php?link={$link}");
             exit();
         } else if ($arr['preview']) {
             header("location:preview.php?link={$link}");
@@ -85,10 +85,10 @@ if (isset($_GET['link'])) {
         if (!empty($_POST['creator']))
             $creator = $_POST['creator'];
 
-        if (empty($_POST['isCapcha']))
-            $capcha = 0;
+        if (empty($_POST['iscaptcha']))
+            $captcha = 0;
         else
-            $capcha = intval($_POST['isCapcha']);
+            $captcha = intval($_POST['iscaptcha']);
 
         if (!empty($_POST['passcode']))
             $passcode = $_POST['passcode'];
@@ -128,7 +128,7 @@ if (isset($_GET['link'])) {
                     $creator = $_SESSION['username'];
                 }
 
-                $query = "INSERT INTO urls ( longurl, shorturl, creator, userid, edit, preview, capcha, passcode, submission) VALUES ( '$url', '$shorted', '$creator', '$userid','$edit', '$preview', '$capcha', '$passcode', '$submission')";
+                $query = "INSERT INTO urls ( longurl, shorturl, creator, userid, edit, preview, captcha, passcode, submission) VALUES ( '$url', '$shorted', '$creator', '$userid','$edit', '$preview', '$captcha', '$passcode', '$submission')";
 
 
                 $result = mysqli_query($conn, $query);
@@ -166,7 +166,7 @@ if (isset($_GET['link'])) {
         $message = "Welcome";
         $creator = "";
         $preview = 0;
-        $capcha = 0;
+        $captcha = 0;
         $passcode = null;
         $shorted = "";
         $url = "";

@@ -20,8 +20,8 @@ RewriteRule ^edit/?$ edit.php [NC,L]
 # Rewrite for preview.php?link=xxxxx
 RewriteRule ^preview/([0-9a-zA-Z]+)$ preview.php?link=$1 [NC,L]
 
-# Rewrite for capcha.php?link=xxxxx
-RewriteRule ^capcha/([0-9a-zA-Z]+)$ capcha.php?link=$1 [NC,L]
+# Rewrite for captcha.php?link=xxxxx
+RewriteRule ^captcha/([0-9a-zA-Z]+)$ captcha.php?link=$1 [NC,L]
 
 # Rewrite for passcode.php?link=xxxxx
 RewriteRule ^passcode/([0-9a-zA-Z]+)$ passcode.php?link=$1 [NC,L]

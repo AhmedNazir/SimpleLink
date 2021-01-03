@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         $edit = $_POST['edit'];
 
     $preview = intval($_POST['preview']);
-    $capcha = intval($_POST['capcha']);
+    $captcha = intval($_POST['captcha']);
     $passcode = $_POST['passcode'];
 
     // $today = Date("Y-m-d");
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    $query = "UPDATE urls SET longurl = '$longurl', creator = '$creator', edit = '$edit', preview ='$preview', capcha = '$capcha', passcode = '$passcode' WHERE  shorturl = '$shorturl';";
+    $query = "UPDATE urls SET longurl = '$longurl', creator = '$creator', edit = '$edit', preview ='$preview', captcha = '$captcha', passcode = '$passcode' WHERE  shorturl = '$shorturl';";
 
     if (mysqli_query($conn, $query)) {
 

@@ -37,15 +37,15 @@ require_once 'includes/functions.db.inc.php';
             $creator = "unknown";
             $editcode = randomKey();
             $preview = 0;
-            $capcha = 0;
+            $captcha = 0;
             $passcode = null;
 
 
             if (!empty($_GET['preview']))
                 $preview = intval($_GET['preview']);
 
-            if (!empty($_GET['capcha']))
-                $capcha = intval($_GET['capcha']);
+            if (!empty($_GET['captcha']))
+                $captcha = intval($_GET['captcha']);
 
             if (!empty($_GET['creator']))
                 $creator = $_GET['creator'];
@@ -53,7 +53,7 @@ require_once 'includes/functions.db.inc.php';
             if (!empty($_GET['passcode']))
                 $passcode = $_GET['passcode'];
 
-            $query = "INSERT INTO urls ( longurl, shorturl, creator, edit, preview, capcha, passcode) VALUES ( '$url', '$shorted', '$creator', '$editcode', '$preview', '$capcha', '$passcode')";
+            $query = "INSERT INTO urls ( longurl, shorturl, creator, edit, preview, captcha, passcode) VALUES ( '$url', '$shorted', '$creator', '$editcode', '$preview', '$captcha', '$passcode')";
 
 
             $result = mysqli_query($conn, $query);
