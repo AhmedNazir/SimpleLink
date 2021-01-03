@@ -110,7 +110,7 @@ if (isset($_GET['link'])) {
                 $query = "SELECT * FROM urls WHERE shorturl =  '$key'";
 
                 $result = mysqli_query($conn, $query);
-                if (mysqli_num_rows($result)) {
+                if (mysqli_num_rows($result) || is_numeric($key)) {
                     $message = "Custom path is not available.<br> Please enter new alias...";
                     $fullURL = $url;
                     $flag = "";

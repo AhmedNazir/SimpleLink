@@ -81,7 +81,13 @@ function validCustomURL() {
     var str = box.value;
     str = str.replace(/\W/g, '');
     // str = str.replace(" ", "");
+
     box.value = str;
+    if (!isNaN(str)) {
+        box.classList.remove("is-valid");
+        return false;
+    }
+
 
     // if (str.length == 0) {
     //     box.classList.remove("is-valid");
