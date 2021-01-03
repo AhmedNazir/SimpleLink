@@ -126,8 +126,9 @@ require_once "db.inc.php";
         <form action="..\update.php" method="POST" class="text-center mt-5">
         <input type="hidden" name="shorturl" value="' . $shorturl . '">
         <input type="hidden" name="actualcode" value="' . $actualcode . '">
-        <input type="password" name="givencode" value="' . $editcode . '">
-        <button type="submit" name="submit" value="submit">Code</button>
+        <label for="path">Enter edit Code</label><br>
+        <input type="password" id="path" name="givencode" value="' . $editcode . '" placeholder ="Edit Code">
+        <button type="submit" name="submit" value="submit" class="btn-success">Code</button>
         </form>
         ';
         } else {
