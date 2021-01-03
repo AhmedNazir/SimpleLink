@@ -1,6 +1,6 @@
 # SimpleLink
 Database
-[SimpleLink](https://github.com/AhmedNazir/SimpleLink/blob/master/urlshorten.sql)
+[SimpleLink](https://github.com/AhmedNazir/SimpleLink/blob/master/urlshortener.sql)
 
 Special Feature:
 1. URL Shorten
