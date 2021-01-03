@@ -82,7 +82,7 @@ $_SESSION['edit'][$data['shorturl']] = $data;
                 if (isset($_SESSION['userid'])) {
                     echo '
                     <li class="nav-item">
-                        <a class="nav-link" href="=user/dashboard.php">Dashboard</a>
+                        <a class="nav-link" href="user/dashboard.php">Dashboard</a>
                     </li>
 
                     <li class="nav-item">

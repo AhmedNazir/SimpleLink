@@ -85,17 +85,17 @@ require_once "db.inc.php";
     <?php
 
 
-if (isset($_GET['error']) && $_GET['error'] == "wrongcode") {
-    echo '
+    if (isset($_GET['error']) && $_GET['error'] == "wrongcode") {
+        echo '
         <div class="alert alert-danger text-center" role="alert">
         Edit Code is Wrong!!!
         </div>
         ';
-}
+    }
 
     if (!empty($_GET['link'])) {
         $shorturl = $_GET['link'];
-        $arr= explode("/",$shorturl);
+        $arr = explode("/", $shorturl);
         $shorturl = end($arr);
 
         $query = "SELECT * FROM urls WHERE shorturl = '$shorturl';";
@@ -113,7 +113,7 @@ if (isset($_GET['error']) && $_GET['error'] == "wrongcode") {
 
             $editcode = "";
             $actualcode = $data['edit'];
-            if (isset($_SESSION['userid']) && $data['userid'] == $_SESSION['userid']) {
+            if ((isset($_SESSION['userid']) && $data['userid'] == $_SESSION['userid']) || ($_SESSION['usertype'] = "admin")) {
                 $editcode = $data['edit'];
                 // $_SESSION['edit'][$shorturl] = $data;
 
