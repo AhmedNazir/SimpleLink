@@ -53,14 +53,64 @@ if (!isset($_SESSION["userid"])) {
         </div>
     </nav>
 
+    <?php
 
-    <div class="text-center mt-5 form">
-        <form action="includes/delete.inc.php" method="post">
-            User ID : <input type="text" name="userid"><br>
-            User Password : <input type="password" name="userpassword"><br>
-            <input type="submit" name="submit" value="submit" class="btn btn-primary mt-3">
-        </form>
-    </div>
+    if (isset($_GET['error'])) {
+
+        if ($_GET['error'] == "admincannotdelete") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'> Admin can not delete !!! </div>";
+        }
+
+        if ($_GET['error'] == "emptyinput") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'> Fill in all field !!! </div>";
+        }
+
+        if ($_GET['error'] == "useridnotmatch") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'> UserID does not exists!!! </div>";
+        }
+
+        if ($_GET['error'] == "pwdnotmatch") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'>Password does not match !!! </div>";
+        }
+
+        if ($_GET['error'] == "stmterror") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'>STMT Error !!! </div>";
+        }
+
+        if ($_GET['error'] == "sqlerror") {
+            echo "
+    <div class='alert alert-danger text-center' role='alert'>SQL Error !!! </div>";
+        }
+    }
+    ?>
+
+    
+    <form action="includes/delete.inc.php" method="POST" class="mt-5" style="width: 50%; margin:auto;">
+        <div class="form-group row mt-3">
+            <label for="userid" class="col-sm-5 col-form-label">User ID</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="userid" name="userid" placeholder="User ID">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="userpassword" class="col-sm-5 col-form-label">Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Password">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <button type="submit" name="submit" value="submit" class="btn btn-danger mt-3">Delete</button>
+        </div>
+
+    </form>
+
 </body>
 
 </html>

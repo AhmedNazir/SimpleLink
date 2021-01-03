@@ -84,16 +84,22 @@ if (empty($_SESSION[$_GET['link']]['passcode'])) {
     </nav>
 
 
-
-
     <?php
 
-    $message = "";
+
     if (!isset($_POST['passcode']) || $_POST['passcode'] != $_SESSION[$_GET['link']]['passcode']) {
-        echo "<form method=\"post\" class=\"passcode-form\">";
-        echo "<input type=\text\" name=\"passcode\" placeholder=\"password\">";
-        echo "<input type=\"submit\" name=\"submit\" value=\"Check\"><br>";
-        echo "</form>";
+
+        if (isset($_POST['passcode']) && $_POST['passcode'] != $_SESSION[$_GET['link']]['passcode']) {
+            echo '<div class="alert alert-danger text-center" role="alert">Enter Correct Password!!!</div>';
+        }
+
+        echo '
+        <form action="" method="post" class="text-center mt-5">
+            Password : <input type="text" name="passcode" placeholder="password">
+            <button type="submit" name="submit" value="submit" class="btn btn-primary" >SUBMIT</button>
+        </form>
+        ';
+
     } else {
 
 
@@ -102,36 +108,9 @@ if (empty($_SESSION[$_GET['link']]['passcode'])) {
 
         header("location:{$longurl}");
         exit();
-
-
-        // // redirect to longurl url...
-        // if (!empty($_GET['link'])) {
-        //     $link = strtolower($_GET['link']);
-
-        //     $query = "SELECT * FROM links WHERE shorturl =  '$link'";
-
-        //     $result = mysqli_query($conn, $query);
-        //     if (mysqli_num_rows($result) != 0) {
-
-        //         $arr = mysqli_fetch_assoc($result);
-
-        //         $full = $arr['longurl'];
-
-        //         if ($arr['passcode'] == $_POST['passcode'] || $arr['passcode'] == null) {
-        //             echo "<script> setTimeout(function() { window.location = \"$full\"; }, 0); </script>";
-        //         } else {
-        //             $message = "Error";
-        //             echo "<script> setTimeout(function() { window.location = \"" . $website . "passcode/" . $link . "\"; }, 0);</script>";
-        //         }
-        //     }
-        // }
     }
     ?>
 
-    <!--<br><br>-->
-    <!-- <a href="create.php">Create</a> -->
-    <!-- <a href="edit.php">Edit</a> -->
-    <!-- <a href="view.php">View</a> -->
     <br>
 
 </body>
@@ -145,8 +124,3 @@ if (empty($_SESSION[$_GET['link']]['passcode'])) {
 
 
 </html>
-
-
-<?php
-mysqli_close($conn);
-?>

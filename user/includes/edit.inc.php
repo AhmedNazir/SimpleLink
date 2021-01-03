@@ -10,7 +10,7 @@ function userExists($conn, $userid, $useremail)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location:../edit.php?errro=stmterror");
+        header("location:../edit.php?error=stmterror");
         exit();
     }
 

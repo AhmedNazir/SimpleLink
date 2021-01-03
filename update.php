@@ -2,12 +2,24 @@
 session_start();
 
 if (!isset($_POST['submit'])) {
-    header("location:dashboard.php");
+    header("location:edit.php");
+    exit();
+}
+
+if (empty($_POST['givencode'])) {
+    header("location:edit.php?link={$_POST['shorturl']}");
     exit();
 }
 
 
-require_once "../includes/db.inc.php";
+
+require_once "includes/db.inc.php";
+
+if ($_POST['actualcode'] != $_POST['givencode']) {
+    header("location:includes/edit.code.inc.php?link={$_POST['shorturl']}&error=wrongcode");
+    exit();
+}
+
 
 $shorturl = $_POST['shorturl'];
 $query = "SELECT * FROM urls WHERE shorturl = '$shorturl';";
@@ -30,8 +42,8 @@ $_SESSION['edit'][$data['shorturl']] = $data;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
     <link rel="icon" type="image/png" href="..\resources\img\favicon.png" />
     <!-- Resources -->
-    <link rel="stylesheet" href="..\resources\css\style.css">
-    <link rel="stylesheet" href="..\resources\css\responsive.css">
+    <link rel="stylesheet" href="resources\css\style.css">
+    <link rel="stylesheet" href="resources\css\responsive.css">
 
     <title>Info</title>
 </head>
@@ -44,39 +56,47 @@ $_SESSION['edit'][$data['shorturl']] = $data;
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="..\index.php">
-                <img src="../resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
+            <a class="navbar-brand mr-auto" href="index.php">
+                <img src="resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="..\index.php">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="../preview">Preview</a>
+                    <a class="nav-link " href="edit.php">Edit</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="\includes\edit.code.inc.php">Edit Code</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="\includes\edit.info.inc.php">Info</a>
                 </li>
 
                 <?php
                 if (isset($_SESSION['userid'])) {
                     echo '
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">Dashboard</a>
+                        <a class="nav-link" href="=user/dashboard.php">Dashboard</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href=/profile.php">' . $_SESSION["username"] . '</a>
+                        <a class="nav-link" href="user/profile.php">' . $_SESSION["username"] . '</a>
                     </li>
                     ';
                 } else {
                     echo '
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link" href="user/login.php">Login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="signup.php">Signup</a>
+                        <a class="nav-link" href="user/signup.php">Signup</a>
                     </li>
                     ';
                 }
@@ -85,7 +105,7 @@ $_SESSION['edit'][$data['shorturl']] = $data;
         </div>
     </nav>
 
-    <form action="includes/url.update.inc.php" method="POST" class="mt-5 mb-5" style="width: 70%; margin:auto;">
+    <form action="includes/edit.update.inc.php" method="POST" class="mt-5 mb-5" style="width: 70%; margin:auto;">
         <div class="form-group row mt-3 mb-5">
             <label for="oldpwd" class="col-sm-5 col-form-label">Custom Alias</label>
             <div class="col-sm-7">

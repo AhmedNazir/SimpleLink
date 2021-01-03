@@ -56,6 +56,7 @@ if (!empty($_GET['link'])) {
         $capcha = $arr['capcha'];
         $time = $arr['submission'];
         $click = $arr['click'];
+        $expire = $arr['expire'];
         if ($arr['passcode']) {
             $passcode = 1;
             $longurl = "Hidden";
@@ -75,7 +76,9 @@ if (!empty($_GET['link'])) {
     } else {
         $flag = "";
         $message = 'Link does not exit';
-        $shorturl = $website . $_GET['link'];
+        $custom = $_GET['link'];
+        // $shorturl = $website."preview.php?link=".$custom;
+        // $shorturl = $website . $_GET['link'];
     }
 }
 ?>
@@ -159,20 +162,18 @@ if (!empty($_GET['link'])) {
 
         <div class="row mb-0">
             <label for="shorturl" class="col-md-2 pl-0">Short URL</label>
-            <input type="text" id="shorturl" name="shorturl" placeholder="Short URL" value="<?php echo $shorturl ?>" class="col-md-5">
+            <input type="text" id="shorturl" name="shorturl" placeholder="Short URL" value="<?php echo $website ?>index.php?link=<?php echo $custom ?>" class="col-md-6">
             <button class="btn btn-success col-md-2 col-4" id="shorturl-copy" onclick="copyToClickboard()">Copy</button>
 
             <!-- <form action="" method="POST" class="form-inline">
-                <input type="hidden" name="shorturl" value="<?php echo $shorturl ?>">
+                <input type="hidden" name="shorturl" value="<?php //echo $shorturl 
+                                                            ?>">
                 <button name="submit" value="submit" class="btn btn-primary col-md-3 col-8">Reveal Long URL</button>
             </form> -->
-            
-            <a class="btn btn-primary col-md-3 col-8" id="shorturl-btn" onclick="validPreview()">Reveal Long URL</a>
+
+            <a class="btn btn-primary col-md-2 col-7" id="shorturl-btn" onclick="validPreview()">Reveal Long URL</a>
 
         </div>
-        <div class="row">
-        </div>
-
         <div class="alert alert-danger text-center" role="alert" <?php echo $flag; ?>>
             <?php echo $message; ?>
         </div>
@@ -198,12 +199,19 @@ if (!empty($_GET['link'])) {
         </div>
 
         <div class="row mb-3">
-            <label for="creator" class="col-sm-2 col-form-label">Time</label>
+            <label for="creator" class="col-sm-2 col-form-label">Submission</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="time" name="time" placeholder="Time" value="<?php echo $time ?>" readonly>
             </div>
         </div>
 
+        <!-- <div class="row mb-3">
+            <label for="creator" class="col-sm-2 col-form-label">Expire</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="expire" name="expire" placeholder="Unlimited" value="<?php //echo $expire 
+                                                                                                                    ?>" readonly>
+            </div>
+        </div> -->
 
         <div class="row mb-3">
             <label for="creator" class="col-sm-2 col-form-label">Total Click</label>

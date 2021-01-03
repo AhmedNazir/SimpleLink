@@ -30,33 +30,20 @@ if (isset($_GET['link'])) {
         if ($arr['passcode']) {
             header("location:password.php?link={$link}");
             exit();
-        }
-        // $full = $website . "passcode/" . $link;
-        else if ($arr['capcha']) {
+        } else if ($arr['capcha']) {
             header("location:capcha.php?link={$link}");
             exit();
-        }
-
-        // $full = $website . "capcha/" . $link;
-        else if ($arr['preview']) {
+        } else if ($arr['preview']) {
             header("location:preview.php?link={$link}");
             exit();
-        }
-        // $full = $website . "preview/" . $link;
-        else {
+        } else {
             $full = $arr['longurl'];
             header("location:{$full}");
             exit();
         }
-
-        // header('location:')
-        // echo "<script> setTimeout(function() { window.location = '$full'; }, 0); </script>";
     } else {
         header("location:preview.php?link={$link}");
         exit();
-
-        // $full = $website . "preview/" . $link;
-        // echo "<script> setTimeout(function() { window.location = '$full'; }, 0); </script>";
     }
 } else {
 
@@ -73,6 +60,19 @@ if (isset($_GET['link'])) {
             $edit = randomKey();
         else
             $edit = $_POST['edit'];
+
+        $submission = Date("Y-m-d");
+
+        // $expire = null;
+        // if (strtotime($_POST['expire'])) {
+        //     if ($_POST['expire'] > $submission)
+        //         $expire = $_POST['expire'];
+        //     else
+        //         $expire = $submission;
+        // } else {
+        //     $expire = null;
+        // }
+
 
         if (!empty($_POST['isPreview']))
             $preview = intval($_POST['isPreview']);
@@ -118,17 +118,15 @@ if (isset($_GET['link'])) {
                 $userid = "";
                 if (isset($_SESSION['userid'])) {
                     $userid = $_SESSION['userid'];
+                    $creator = $_SESSION['username'];
                 }
-                $query = "INSERT INTO urls ( longurl, shorturl, creator, userid, edit, preview, capcha, passcode) VALUES ( '$url', '$shorted', '$creator', '$userid','$edit', '$preview', '$capcha', '$passcode')";
+
+                $query = "INSERT INTO urls ( longurl, shorturl, creator, userid, edit, preview, capcha, passcode, submission) VALUES ( '$url', '$shorted', '$creator', '$userid','$edit', '$preview', '$capcha', '$passcode', '$submission')";
 
 
                 $result = mysqli_query($conn, $query);
                 if ($result) {
-                    // $shorted = strval(mysqli_insert_id($conn));
                     $full = "$website$shorted";
-
-                    // $message = "<p id='seltxt' style='user-select:all'>$full </p>";
-                    // $message .= "<a href='$full' class='btn btn-primary'>GO</a>";
 
 
                     if (isset($_SESSION['userid'])) {
@@ -145,10 +143,6 @@ if (isset($_GET['link'])) {
                     $_SESSION['wildcard']   = $shorted;
                     header("location:preview.php?link={$shorted}");
                     exit();
-
-
-                    // echo "<script> setTimeout(function() { window.location = 'preview/$shorted'; }, 0); </script>";
-
 
                     $_POST['link'] = "";
                 } else {
@@ -169,7 +163,12 @@ if (isset($_GET['link'])) {
         $passcode = null;
         $shorted = "";
         $url = "";
+        $submission = Date("Y-m-d");
         $edit = randomKey();
+
+        if (isset($_SESSION['username'])) {
+            $creator = $_SESSION['username'];
+        }
     }
 
     require_once "includes/index.inc.php";

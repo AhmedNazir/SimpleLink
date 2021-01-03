@@ -29,7 +29,7 @@ require_once "includes/profile.inc.php";
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="index.php">
+            <a class="navbar-brand mr-auto" href="..\index.php">
                 <img src="..\resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
@@ -56,13 +56,45 @@ require_once "includes/profile.inc.php";
 
 
 
-    <div class="text-center mt-5 form">
-        Name : <input type="text" name="username" value="<?php echo $username ?>" disabled><br>
-        email : <input type="text" name="useremail" value="<?php echo $useremail ?>" disabled><br>
-        id : <input type="text" name="userid" value="<?php echo $userid ?> " disabled><br>
-        type : <input type="text" name="usertype" value="<?php echo $usertype ?>" disabled><br>
-        total Url : <input type="text" name="totalurl" value="<?php echo $totalurl ?>" disabled><br>
-    </div>
+    <form class="mt-5" style="width: 500px; margin:auto;">
+        <div class="form-group row mt-3">
+            <label for="username" class="col-sm-3 col-form-label">Full Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Full Name" value="<?php echo $username ?>" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="useremail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="useremail" name="useremail" placeholder="Email" value="<?php echo $useremail ?>" disabled>
+            </div>
+        </div>
+
+
+        <div class="form-group row mt-3">
+            <label for="userid" class="col-sm-3 col-form-label">UserID</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="userid" name="userid" placeholder="userid" value="<?php echo $userid ?>" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="usertype" class="col-sm-3 col-form-label">User Type</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="usertype" name="usertype" placeholder="usertype" value="<?php echo $usertype ?>" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="totalurl" class="col-sm-3 col-form-label">Total Url </label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="totalurl" name="totalurl" placeholder="totalurl" value="<?php echo $totalurl ?>" disabled>
+            </div>
+        </div>
+    </form>
+
+
 
     <div class="text-center mt-5">
         <p class="font-weight-bolder">Edit Info? <a href="edit.php">Edit</a></p>
@@ -75,6 +107,7 @@ require_once "includes/profile.inc.php";
     <div class="text-center mt-5">
         <p class="font-weight-bolder">Delete Account? <a href="delete.php" class="text-danger">DELETE</a></p>
     </div>
+    </form>
 </body>
 
 </html>

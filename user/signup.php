@@ -34,7 +34,7 @@ if (isset($_SESSION["userid"])) {
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="index.php">
+            <a class="navbar-brand mr-auto" href="..\index.php">
                 <img src="..\resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
@@ -59,7 +59,7 @@ if (isset($_SESSION["userid"])) {
         </div>
     </nav>
 
-    <div class="container-fluid text-center mt-5">
+    <div class="container-fluid text-center mt-5 " style="width: 500px; margin:auto;">
         <?php
 
         if (isset($_GET['error'])) {
@@ -111,26 +111,50 @@ if (isset($_SESSION["userid"])) {
             echo "
         <div class='alert alert-success' role='alert'> Welcome to signup page </div>";
         }
-
-
         ?>
-        <form action="includes/signup.inc.php" method="POST">
-            <input type="text" name="username" placeholder="Full Name"><br>
-            <input type="text" name="userid" placeholder="User ID"><br>
-            <input type="text" name="useremail" placeholder="User Email"><br>
-            <input type="password" name="userpassword" placeholder="User Password"><br>
-            <input type="password" name="repeatpassword" placeholder="Repeat Password"><br>
-            <input type="submit" name="submit" class="btn btn-primary mt-3">
-        </form>
     </div>
+
+
+
+    <form action="includes/signup.inc.php" method="post" style="width: 500px; margin:auto;" class="form">
+
+        <div class="form-group mt-2">
+            <label for="username"> Full Name</label>
+            <input type="text" name="username" id="username" placeholder="Full Name" class="form-control">
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="userid"> User ID</label>
+            <input type="text" name="userid" id="userid" placeholder="User ID" class="form-control">
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="useremail">User Email</label>
+            <input type="text" name="useremail" id="useremail" placeholder="User Email" class="form-control">
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="userpassword">User Password</label>
+            <input type="password" name="userpassword" id="userpassword" placeholder="User Password" class="form-control">
+        </div>
+
+
+        <div class="form-group mt-2">
+            <label for="repeatpassword">Repeat Password</label>
+            <input type="password" name="repeatpassword" id="repeatpassword" placeholder="Repeat Password" class="form-control">
+        </div>
+
+        <div class="form-group mt-2 text-center">
+            <input type="submit" name="submit" class="btn btn-primary mt-3">
+        </div>
+
+    </form>
+
 
     <div class="text-center mt-5">
         <p>Already have account?</p>
         <a href="login.php">login</a>
     </div>
-
-
-
 </body>
 
 </html>

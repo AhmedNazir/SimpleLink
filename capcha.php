@@ -9,7 +9,7 @@ if (!isset($_SESSION[$_GET['link']])) {
 if ((int)$_SESSION[$_GET['link']]['capcha'] == 0) {
     header("location:index.php?link={$_GET['link']}");
     exit();
-} 
+}
 
 ?>
 
@@ -89,35 +89,24 @@ if ((int)$_SESSION[$_GET['link']]['capcha'] == 0) {
 
     if (!isset($_POST['rr']) || (int)$_POST['rr'] != (int)$_POST['ra'] + (int)$_POST['rb']) {
 
-        // while (true) {
+        if (isset($_POST['rr']) && (int)$_POST['rr'] != (int)$_POST['ra'] + (int)$_POST['rb']) {
+            echo '<div class="alert alert-danger text-center" role="alert">Please Add Two Numbers !!!</div>';
+        }
+
+
         $ra = random_int(0, 5);
         $rb = random_int(0, 4);
         $rr = $ra + $rb;
 
-        echo "<form method=\"post\" class=\"capcha-form\">";
-        echo "<input type=\number\" name=\"ra\" value=\"$ra\">";
-        echo " + ";
-        echo "<input type=\number\" name=\"rb\" value=\"$rb\">";
-        echo " = ";
-        echo "<input type=\number\" name=\"rr\" >";
-        echo "<input type=\"submit\" name=\"submit\" value=\"Check\"><br>";
-        echo "</form>";
+        echo '
+        <form action="" method="post" class ="mt-5 text-center">
+            <input type="hidden" name="ra" value="' . $ra . '">
+            <input type="hidden" name="rb" value="' . $rb . '">
 
-
-        $form = '
-        <form class="form-box capcha-form" action = ' . $_GET['link'] . ' method="post">
-        <div class="input-group mb-8">
-            <span class="input-group-text">' . $ra . '</span>
-            <span class="input-group-text"> + </span>
-            <span class="input-group-text">' . $rb . '</span>
-            <span class="input-group-text"> = </span>
-            <input type="number" class="form-control" placeholder="result" aria-label="Username" aria-describedby="basic-addon1" id="" name="rr" value="">
-            <input type="submit" class="btn btn-primary" name="submit" value="check">CHECK</input>
-        </div>
+            <b>' . $ra . '</b> + <b>' . $rb . '</b>=<input type="number" name="rr">
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">SUBMIT</button>
         </form>
         ';
-
-        // echo $form;
     } else {
 
         $longurl = $_SESSION[$_GET['link']]['longurl'];
@@ -125,31 +114,6 @@ if ((int)$_SESSION[$_GET['link']]['capcha'] == 0) {
 
         header("location:{$longurl}");
         exit();
-
-
-
-        // redirect to longurl url...
-        // if (!empty($_GET['link'])) {
-        //     $link = strtolower($_GET['link']);
-
-        //     $query = "SELECT * FROM links WHERE shorturl =  '$link'";
-
-        //     $result = mysqli_query($conn, $query);
-        //     if (mysqli_num_rows($result) != 0) {
-
-        //         $arr = mysqli_fetch_assoc($result);
-
-        //         $full = $arr['longurl'];
-
-        //         if ($arr['preview'] || $arr['passcode']) {
-        //             $_SESSION['capcha'] = "true";
-        //             $full = $website . "preview/" . $link;
-        //             echo "<script> setTimeout(function() { window.location = \"$full\"; }, 0); </script>";
-        //         }
-
-        //         echo "<script> setTimeout(function() { window.location = \"$full\"; }, 0); </script>";
-        //     }
-        // }
     }
     ?>
 

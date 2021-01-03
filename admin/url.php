@@ -49,9 +49,7 @@ require_once "../includes/db.inc.php";
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="../preview.php">Preview</a>
-                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link " href="dashboard.php">Admin</a>
@@ -70,13 +68,22 @@ require_once "../includes/db.inc.php";
                     <a class="nav-link " href="../user/dashboard.php">User Section</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../user/logout.php">Logout</a>
-                </li>
 
             </ul>
         </div>
     </nav>
+
+
+    <?php
+    if (isset($_GET['error'])) {
+        if ($_GET['error'] == "notdeleted") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'> Delete Query failed !!! </div>";
+        }
+    }
+
+    ?>
+
 
     <div class=" text-center mt-5">
         <form action="" method="POST">

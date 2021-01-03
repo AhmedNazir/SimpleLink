@@ -140,9 +140,8 @@ function validPreview() {
     // var site = document.getElementById("website");
     var btn = document.getElementById("shorturl-btn");
     str = box.value;
-    list = str.split("/");
+    list = str.split("=");
     custom = "preview.php?link=" + list[list.length - 1];
-
     btn.href = custom;
 }
 

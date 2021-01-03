@@ -54,15 +54,64 @@ if (!isset($_SESSION["userid"])) {
     </nav>
 
 
+    <?php
+    if (isset($_GET['error'])) {
+        if ($_GET['error'] == "emptyinput") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'> Fill in all field !!! </div>";
+        }
 
-    <div class="text-center mt-5 form">
-    <form action="includes/password.inc.php" method="POST">
-            Old Password : <input type="password" name="oldpwd"><br>
-            New Password : <input type="password" name="newpwd"><br>
-            Repeat New Password : <input type="password" name="repeatnewpwd"><br>
-            <input type="submit" name="submit" value="submit" class="btn btn-primary mt-3">
-        </form>
-    </div>
+        if ($_GET['error'] == "oldnotmatch") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'> Old Password is incorrect!!!  </div>";
+        }
+
+        if ($_GET['error'] == "newpwdnotmatch") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'>Password does not match!!! </div>";
+        }
+
+        if ($_GET['error'] == "prepareerror") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'>Prepare Error !!! </div>";
+        }
+
+        if ($_GET['error'] == "sqlerror") {
+            echo "
+                <div class='alert alert-danger text-center' role='alert'>SQL Error !!! </div>";
+        }
+    }
+
+    ?>
+
+    <form action="includes/password.inc.php" method="POST" class="mt-5" style="width: 500px; margin:auto;">
+        <div class="form-group row mt-3">
+            <label for="oldpwd" class="col-sm-5 col-form-label">Old Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="oldpwd" name="oldpwd" placeholder="Old Password">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="newpwd" class="col-sm-5 col-form-label">New Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="newpwd" name="newpwd" placeholder="New Password">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="repeatnewpwd" class="col-sm-5 col-form-label">Repeat New Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="repeatnewpwd" name="repeatnewpwd" placeholder="Repeat New Password">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <button type="submit" name="submit" value="submit" class="btn btn-primary mt-3">Change</button>
+        </div>
+
+    </form>
+
 </body>
 
 </html>

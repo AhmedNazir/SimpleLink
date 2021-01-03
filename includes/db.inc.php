@@ -12,7 +12,7 @@ $dbHost = "localhost";
 $dbUser = "root";
 $dbPassword = "";
 $dbName = "urlshortener";
-$website =  "http://" . $_SERVER['SERVER_NAME']."/";
+$website =  "http://{$_SERVER['SERVER_NAME']}/simplelink/";
 
 $conn = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName);
 

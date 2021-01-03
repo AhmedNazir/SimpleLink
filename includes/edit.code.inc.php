@@ -111,7 +111,7 @@ require_once "db.inc.php";
             }
 
             echo '
-        <form action="edit.info.inc.php" method="POST" class="text-center mt-5">
+        <form action="..\update.php" method="POST" class="text-center mt-5">
         <input type="hidden" name="shorturl" value="' . $shorturl . '">
         <input type="hidden" name="actualcode" value="' . $actualcode . '">
         <input type="password" name="givencode" value="' . $editcode . '">

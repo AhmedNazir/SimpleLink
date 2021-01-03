@@ -70,9 +70,9 @@
 
     <?php
     if (!empty($message)) {
-        if ($message == "Welcome"){
+        if ($message == "Welcome") {
             echo '<div class="alert alert-success text-center" role="alert">' . $message . '</div>';
-        }else {
+        } else {
             echo '<div class="alert alert-danger text-center" role="alert">' . $message . '</div>';
         }
     }
@@ -83,16 +83,16 @@
     </div> -->
 
 
-    <!-- Form -->
+    <!-- Form
     <form action="" method="post">
 
         <div class="container mt-5 w-90 pl-3 pr-3">
             <div class="row mb-5">
                 <label for="longurl" class="col-md-3 pl-0">Long URL</label>
-                <!--<input type="text" id="longurl" oninput="validSubmit()" name="link" value="' . $url . '" class="col-md-7 col-8">-->
-
+                <input type="text" id="longurl" oninput="validSubmit()" name="link" value="' . $url . '" class="col-md-7 col-8">-->
+    <!-- 
                 <div class="col-md-7 col-8  pl-0">
-                    <input type="text" class="form-control" id="longurl" oninput="validSubmit()" name="link" value="<?php $url ?>" placeholder="Long URL">
+                    <input type="text" class="form-control" id="longurl" oninput="validSubmit()" name="link" value="<?php echo $url ?>" placeholder="Long URL">
                 </div>
                 <button type="submit" id="create" name="create" value="submit" class="col-md-2 col-4 btn btn-primary" disabled>Create</button>
             </div>
@@ -103,28 +103,30 @@
 
             <div class="row form-row">
                 <label for="custom" class="col-md-3 pl-0">Custom Alias</label>
-                <input type="text" class="col-md-4 col-6 input-group-text" value="<?php $website ?>" readonly>
-                <!--<p class="col-md-4 col-4"><mark>' . $website . '</mark></p>-->
-
+                <input type="text" class="col-md-4 col-6 input-group-text" value="<?php echo $website ?>" readonly> -->
+    <!--<p class="col-md-4 col-4"><mark>' . $website . '</mark></p>-->
+    <!-- 
                 <div class="col-md-5 col-6  pl-0">
-                    <input type="text" class="form-control" id="shorturl" name="custom" oninput="validCustomURL()" value="<?php $shorted ?>" placeholder="Custom Alias">
+                    <input type="text" class="form-control" id="shorturl" name="custom" oninput="validCustomURL()" value="<?php echo $shorted ?>" placeholder="Custom Alias">
                 </div>
-
-                <!--  <input type="text" id="shorturl" name="custom" oninput="validSubmit()" value="' . $shorted . '" 
-                            placeholder="Custom Alias" class="col-md-5 col-4">-->
             </div>
 
             <div class="row">
                 <label for="creator" class="col-md-3 pl-0 ">Creator</label>
-                <input type="text" id="creator" name="creator" placeholder="Creator name" oninput="validCreator()" value="<?php $creator ?>" class="col-md-9">
+                <input type="text" id="creator" name="creator" placeholder="Creator name" oninput="validCreator()" value="<?php echo $creator ?>" class="col-md-9">
             </div>
 
             <div class="row">
                 <label for="edit" class="col-md-3 pl-0">Edit Code</label>
-                <input type="text" id="edit" name="edit" placeholder="Edit code" value="<?php $edit ?>" class="col-md-9">
-            </div>
+                <input type="text" id="edit" name="edit" placeholder="Edit code" value="<?php echo $edit ?>" class="col-md-9">
+            </div> -->
 
-            <div class="row mt-4">
+    <!-- <div class="row">
+                <label for="edit" class="col-md-3 pl-0">expire</label>
+                <input type="date" id="expire" name="expire" placeholder="expire" class="col-md-9">
+            </div> -->
+
+    <!-- <div class="row mt-4">
                 <div>
                     <input type="checkbox" id="forcePreview" value="1" name="isPreview">
                     <label for="forcePreview">Force Preview</label>
@@ -149,7 +151,85 @@
 
         </div>
 
+    </form> -->
+
+
+
+    <form action="" method="POST" class="mt-5" style="width: 70%; margin:auto;">
+        <div class="container mt-5 w-90 pl-3 pr-3">
+            <div class="row mb-5">
+                <label for="longurl" class="col-md-3 pl-0">Long URL</label>
+
+                <div class="col-md-7 col-8  pl-0">
+                    <input type="text" class="form-control" id="longurl" oninput="validSubmit()" name="link" value="<?php echo $url ?>" placeholder="Long URL">
+                </div>
+                <button type="submit" id="create" name="create" value="submit" class="col-md-2 col-4 btn btn-primary" disabled>Create</button>
+            </div>
+
+            <div class="row mb-3">
+                <input type="text" placeholder="Optional" class="form-control text-center" readonly>
+            </div>
+
+            <div class="row form-row">
+                <label for="custom" class="col-md-3 pl-0">Custom Alias</label>
+                <input type="text" class="col-md-4 col-4 input-group-text" value="<?php echo $website ?>" readonly>
+
+                <div class="col-md-5 col-6  pl-0">
+                    <input type="text" class="form-control" id="shorturl" name="custom" oninput="validCustomURL()" value="<?php echo $shorted ?>" placeholder="Custom Alias">
+                </div>
+            </div>
+
+            <div class="form-group row mt-3">
+                <label for="creator" class="col-sm-5 col-form-label">Creator</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="creator" name="creator" oninput="validCreator()" value="<?php echo $creator ?>" placeholder="creator">
+                </div>
+            </div>
+
+            <div class="form-group row mt-3">
+                <label for="edit" class="col-sm-5 col-form-label">Edit</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="edit" name="edit" value="<?php echo $edit ?>" placeholder="creator">
+                </div>
+            </div>
+
+
+            <div class="form-group row mt-3">
+                <label for="submission" class="col-sm-5 col-form-label">Submission</label>
+                <div class="col-sm-7">
+                    <input type="date" class="form-control" id="submission" name="submission" value="<?php echo $submission ?>" placeholder="submission" disabled>
+                </div>
+            </div>
+
+            <!-- <div class="form-group row mt-3">
+            <label for="expire" class="col-sm-5 col-form-label">Expire</label>
+            <div class="col-sm-7">
+                <input type="date" class="form-control" id="expire" name="expire" value="<?php //echo $data['expire'] 
+                                                                                            ?>" placeholder="expire" disabled>
+            </div>
+        </div> -->
+
+
+            <div class="mt-3 form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="preview" value="1" name="isPreview" <?php echo $preview  ? 'checked' : '' ?>>
+                <label class="form-check-label" for="preview" checked>Force Preview</label>
+            </div>
+
+
+            <div class="mt-3 form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="capcha" value="1" name="isCapcha" <?php echo $capcha ? 'checked' : '' ?>>
+                <label class="form-check-label" for="capcha">Force Capcha</label>
+            </div>
+
+            <div class="mt-3 form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="forcePassCode" value="1" name="isPassCode" onclick="passcodeBox()">
+                <label for="forcePassword" class="form-check-label">Force Password</label>
+                <input type="text" id="passbox" oninput="validPassCode()" name="passcode" disabled class="col-6 ">
+            </div>
+
+            
     </form>
+
 
 </body>
 

@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once "includes/db.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,21 +37,72 @@
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="preview.php">Preview</a>
+                    <a class="nav-link active" href="preview.php">Preview</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="user/login.php">Login</a>
+                    <a class="nav-link" href="edit.php">Edit</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user/signup.php">Signup</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="about.php">About</a>
-                </li>
+
+
+                <?php
+                if (isset($_SESSION['userid'])) {
+                    echo '
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/dashboard.php">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/profile.php">' . $_SESSION["username"] . '</a>
+                    </li>
+                    ';
+                } else {
+                    echo '
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/login.php">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/signup.php">Signup</a>
+                    </li>
+                    ';
+                }
+
+                ?>
             </ul>
         </div>
     </nav>
 
 
+    <?php
+    $query = "SELECT * FROM users WHERE 1;";
+
+    $result = mysqli_query($conn, $query);
+    $users = mysqli_num_rows($result);
+
+
+    $query = "SELECT * FROM urls WHERE 1;";
+
+    $result = mysqli_query($conn, $query);
+    $urls = mysqli_num_rows($result);
+
+    ?>
+
+    <div class="row text-center mt-5">
+        <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
+            <div class="card-header">Total Users</div>
+            <div class="card-body">
+                <h5 class="card-title text-danger"><?php echo $users ?></h5>
+                <p class="card-text">Number of users is growing..</p>
+            </div>
+        </div>
+        <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
+            <div class="card-header">Total URLs</div>
+            <div class="card-body">
+                <h5 class="card-title text-danger"><?php echo $urls ?></h5>
+                <p class="card-text">Number of urls is growing..</p>
+            </div>
+        </div>
 </body>
+
 </html>

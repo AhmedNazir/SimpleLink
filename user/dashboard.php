@@ -49,7 +49,16 @@ require_once "../includes/db.inc.php";
                     <a class="nav-link " href="../preview.php">Preview</a>
                 </li>
 
+
+
                 <?php
+
+                if ($_SESSION['usertype'] == "admin") {
+                    echo '<li class="nav-item">
+                        <a class="nav-link" href="../admin/dashboard.php">Admin</a>
+                        </li>';
+                }
+
                 if (isset($_SESSION['userid'])) {
                     echo '
                     <li class="nav-item">
@@ -57,7 +66,7 @@ require_once "../includes/db.inc.php";
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a>
                     </li>
                     ';
                 } else {
@@ -72,15 +81,7 @@ require_once "../includes/db.inc.php";
                     ';
                 }
 
-                if ($_SESSION['usertype'] == "admin") {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="../admin/dashboard.php">Admin</a>
-                        </li>';
-                }
                 ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="../edit.php">Edit</a>
-                </li>
 
             </ul>
         </div>
@@ -218,7 +219,7 @@ require_once "../includes/db.inc.php";
     echo "<b>page : </b>";
     for ($i = 0; $i <= $row; $i++) {
         echo '
-            <b><a href="url.php?page=' . $i . '">[' . $i . ']</a> </b>
+            <b><a href="dashboard.php?page=' . $i . '">[' . $i . ']</a> </b>
             ';
     }
 

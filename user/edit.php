@@ -32,7 +32,7 @@ require_once "includes/profile.inc.php";
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="index.php">
+            <a class="navbar-brand mr-auto" href="..\index.php">
                 <img src="..\resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
@@ -58,16 +58,82 @@ require_once "includes/profile.inc.php";
     </nav>
 
 
+    <?php
 
-    <div class="text-center mt-5 form">
-        <form action="includes/edit.inc.php" method="post">
-            Name : <input type="text" name="username" value="<?php echo $username ?>"><br>
-            email : <input type="text" name="useremail" value="<?php echo $useremail ?>"><br>
-            id : <input type="text" name="userid" value="<?php echo $userid ?>"><br>
-            type : <input type="text" name="usertype" value="<?php echo $usertype ?>" disabled><br>
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary mt-3">
-        </form>
-    </div>
+    if (isset($_GET['error'])) {
+        if ($_GET['error'] == "emptyinput") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'> Fill in all field !!! </div>";
+        }
+
+        if ($_GET['error'] == "invaliduserid") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'> UserID should be only alphabet and number!!! </div>";
+        }
+
+        if ($_GET['error'] == "invalidemail") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'>Invalid EMail Address !!! </div>";
+        }
+
+        if ($_GET['error'] == "useridexist") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'>Already User exists </div>";
+        }
+
+        if ($_GET['error'] == "useremailexists") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'>Already Email exists </div>";
+        }
+
+        if ($_GET['error'] == "stmterror") {
+            echo "
+        <div class='alert alert-danger text-center' role='alert'>SQL Error !!! </div>";
+        }
+    }
+    ?>
+
+    <form action="includes/edit.inc.php" class="mt-5" method="post" style="width: 50%; margin:auto;">
+        <div class="form-group row mt-3">
+            <label for="username" class="col-sm-3 col-form-label">Full Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Full Name" value="<?php echo $username ?>">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="useremail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="useremail" name="useremail" placeholder="Email" value="<?php echo $useremail ?>">
+            </div>
+        </div>
+
+
+        <div class="form-group row mt-3">
+            <label for="userid" class="col-sm-3 col-form-label">UserID</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="userid" name="userid" placeholder="userid" value="<?php echo $userid ?>">
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="usertype" class="col-sm-3 col-form-label">User Type</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="usertype" name="usertype" placeholder="usertype" value="<?php echo $usertype ?>" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="totalurl" class="col-sm-3 col-form-label">Total Url </label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="totalurl" name="totalurl" placeholder="totalurl" value="<?php echo $totalurl ?>" disabled>
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <button type="submit" name="submit" value="submit" class="btn btn-success mt-3">EDIT</button>
+        </div>
+    </form>
+
 </body>
 
 </html>

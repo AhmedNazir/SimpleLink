@@ -91,7 +91,7 @@ session_start();
 
 
     <form action="includes/edit.code.inc.php" method="GET" class="text-center mt-5">
-        <input type="text" name="link">
+        <input type="text" name="link" placeholder="custom path">
         <button type="submit">Edit</button>
     </form>
 </body>

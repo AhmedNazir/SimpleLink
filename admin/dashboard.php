@@ -29,7 +29,7 @@ require_once "../includes/db.inc.php";
     <link rel="stylesheet" href="..\resources\css\style.css">
     <link rel="stylesheet" href="..\resources\css\responsive.css">
 
-    <title>Account</title>
+    <title>ADMIN Panel</title>
 
 </head>
 
@@ -68,10 +68,6 @@ require_once "../includes/db.inc.php";
                     <a class="nav-link " href="../user/dashboard.php">User Section</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../user/logout.php">Logout</a>
-                </li>
-
             </ul>
         </div>
     </nav>
@@ -91,21 +87,24 @@ require_once "../includes/db.inc.php";
 
     ?>
 
-    <div class="row text-center mt-5">
-        <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
-            <div class="card-header">Total Users</div>
-            <div class="card-body">
-                <h5 class="card-title text-danger"><?php echo $users ?></h5>
-                <p class="card-text">Number of users is growing..</p>
+    <div class="container container-fluid">
+        <div class="row text-center mt-5">
+            <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
+                <div class="card-header">Total Users</div>
+                <div class="card-body">
+                    <h5 class="card-title text-danger"><?php echo $users ?></h5>
+                    <p class="card-text">Number of users is growing..</p>
+                </div>
+            </div>
+            <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
+                <div class="card-header">Total URLs</div>
+                <div class="card-body">
+                    <h5 class="card-title text-danger"><?php echo $urls ?></h5>
+                    <p class="card-text">Number of urls is growing..</p>
+                </div>
             </div>
         </div>
-        <div class="card text-white bg-info mb-3 ml-3" style="max-width: 18rem;">
-            <div class="card-header">Total URLs</div>
-            <div class="card-body">
-                <h5 class="card-title text-danger"><?php echo $urls ?></h5>
-                <p class="card-text">Number of urls is growing..</p>
-            </div>
-        </div>
+
 </body>
 
 </html>

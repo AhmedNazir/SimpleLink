@@ -69,7 +69,7 @@ require_once 'includes/functions.db.inc.php';
     } else if ((empty($_GET['link']))&&!empty($_GET['custom'])) {
 
         $key = $_GET['custom'];
-        $query = "SELECT * FROM links WHERE shorturl =  '$key'";
+        $query = "SELECT * FROM urls WHERE shorturl =  '$key'";
 
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result)) {

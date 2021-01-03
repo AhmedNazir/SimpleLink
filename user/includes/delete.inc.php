@@ -8,6 +8,11 @@ if (isset($_POST['submit'])) {
     $userid = $_POST['userid'];
     $userpassword = $_POST['userpassword'];
 
+    if ($_SESSION['usertype'] == "admin") {
+        header("location:../delete.php?error=admincannotdelete");
+        exit();
+    }
+
     if (empty($userid) || empty($userpassword)) {
         header("location:../delete.php?error=emptyinput");
         exit();

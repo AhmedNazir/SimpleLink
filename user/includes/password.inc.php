@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location:../password.php?error=prepareerror");
+        header("location:../password.php?error=sqlerror");
         exit();
     }
 
