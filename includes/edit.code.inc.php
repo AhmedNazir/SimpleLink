@@ -34,7 +34,7 @@ require_once "db.inc.php";
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="header">
         <div class="container-fluid">
 
-            <a class="navbar-brand mr-auto" href="index.php">
+            <a class="navbar-brand mr-auto" href="../index.php">
                 <img src="../resources\img\logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
                 URL Shortener
             </a>
