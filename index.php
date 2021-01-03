@@ -6,6 +6,7 @@ require_once 'includes/functions.db.inc.php';
 ?>
 
 
+
 <?php
 // redirect to longurl url...
 if (isset($_GET['link'])) {
@@ -46,6 +47,8 @@ if (isset($_GET['link'])) {
         exit();
     }
 } else {
+
+    include_once "includes/login.cookies.inc.php";
 
 
     $message = "Welcome";
@@ -115,7 +118,7 @@ if (isset($_GET['link'])) {
 
             if ($flag) {
 
-                $userid = "";
+                $userid = "guest";
                 if (isset($_SESSION['userid'])) {
                     $userid = $_SESSION['userid'];
                     $creator = $_SESSION['username'];

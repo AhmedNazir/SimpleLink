@@ -33,21 +33,6 @@ if (!empty($_GET['link'])) {
 
         $arr = mysqli_fetch_assoc($result);
 
-        // if (empty($_SESSION['capcha']) && $arr['capcha'] && $_SESSION['wildcard'] != $link) {
-        //     $full = $website . "capcha/" . $link;
-        //     echo "<script> setTimeout(function() { window.location = \"$full\"; }, 0); </script>";
-        // }
-
-        // // update Click
-        // $totalclick = $arr['click'] + 1;
-        // $query = "UPDATE links SET click='$totalclick' WHERE shorturl =  '$link'";
-
-        // $result = mysqli_query($conn, $query);
-
-        // echo '<pre>';
-        // print_r($arr);
-        // echo '</pre>';
-
         $longurl = $arr['longurl'];
         $custom = $arr['shorturl'];
         $shorturl = $website . $custom;
@@ -65,7 +50,7 @@ if (!empty($_GET['link'])) {
             $passcode = 0;
 
 
-        if ($_SESSION['wildcard'] == $link) {
+        if (isset($_SESSION['wildcard']) && $_SESSION['wildcard'] == $link) {
             $_SESSION['wildcard'] = '';
             $edit = $arr['edit'];
             if ($arr['passcode'])

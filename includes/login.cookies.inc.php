@@ -1,14 +1,6 @@
+
 <?php
-
-function isEmptyInput($userid, $userpassword)
-{
-    if (empty($userid) || empty($userpassword)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
+// COOKIES............
 
 function useridExist($conn, $userid, $useremail)
 {
@@ -16,8 +8,7 @@ function useridExist($conn, $userid, $useremail)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location:../login.php?error=stmterror");
-        exit();
+        return false;
     }
 
     mysqli_stmt_bind_param($stmt, "ss", $userid, $useremail);
@@ -33,12 +24,14 @@ function useridExist($conn, $userid, $useremail)
     mysqli_stmt_close($stmt);
 }
 
-function login($conn, $userid, $userpassword)
+
+function login($conn, $userid, $useremail, $userpassword)
 {
     $userdata = useridExist($conn, $userid, $userid);
+
     if ($userdata) {
 
-        if (password_verify($userpassword, $userdata["userpassword"])) {
+        if (password_verify($userdata['useremail'], $useremail) && password_verify($userdata["userpassword"], $userpassword)) {
 
             $_SESSION["userid"] = $userdata["userid"];
             $_SESSION["useremail"] = $userdata["useremail"];
@@ -46,8 +39,6 @@ function login($conn, $userid, $userpassword)
             $_SESSION["userpassword"] = $userdata["userpassword"];
             $_SESSION["usertype"] = $userdata["usertype"];
             $_SESSION["totalurl"] = $userdata["totalurl"];
-
-
 
             $cookie_name = 'userid';
             $cookie_value = $userdata['userid'];
@@ -64,15 +55,18 @@ function login($conn, $userid, $userpassword)
             $cookie_value = password_hash($userdata['userpassword'], PASSWORD_DEFAULT);
             $time = 30;
             setcookie($cookie_name, $cookie_value, time() + (86400 * $time), "/");
-
-            header("location:../dashboard.php");
-            exit();
-        } else {
-            header("location:../login.php?error=pwdnotmatch");
-            exit();
         }
-    } else {
-        header("location:../login.php?error=usernotexist");
-        exit();
     }
 }
+
+
+if (isset($_COOKIE['userid']) && !isset($_SESSION['userid'])) {
+    $cid = $_COOKIE['userid'];
+    $cemail = $_COOKIE['useremail'];
+    $cpassword = $_COOKIE['userpassword'];
+
+    login($conn, $cid, $cemail, $cpassword);
+}
+
+
+?>
