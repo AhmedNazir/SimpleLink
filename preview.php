@@ -147,7 +147,7 @@ if (!empty($_GET['link'])) {
 
         <div class="row mb-0">
             <label for="shorturl" class="col-md-2 pl-0">Short URL</label>
-            <input type="text" id="shorturl" name="shorturl" placeholder="Short URL" value="<?php echo $website ?>index.php?link=<?php echo $custom ?>" class="col-md-6">
+            <input type="text" id="shorturl" name="shorturl" placeholder="Short URL" value="<?php echo $website ?><?php echo $custom ?>" class="col-md-6">
             <button class="btn btn-success col-md-2 col-4" id="shorturl-copy" onclick="copyToClickboard()">Copy</button>
 
             <!-- <form action="" method="POST" class="form-inline">

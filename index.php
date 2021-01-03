@@ -52,7 +52,7 @@ if (isset($_GET['link'])) {
 
 
     $message = "Welcome";
-    if (isset($_POST['link'])) {
+    if (isset($_POST['submit'])) {
 
         $url = $_POST['link'];
 
@@ -77,13 +77,17 @@ if (isset($_GET['link'])) {
         // }
 
 
-        if (!empty($_POST['isPreview']))
+        if (empty($_POST['isPreview']))
+            $preview = 0;
+        else
             $preview = intval($_POST['isPreview']);
 
         if (!empty($_POST['creator']))
             $creator = $_POST['creator'];
 
-        if (!empty($_POST['isCapcha']))
+        if (empty($_POST['isCapcha']))
+            $capcha = 0;
+        else
             $capcha = intval($_POST['isCapcha']);
 
         if (!empty($_POST['passcode']))

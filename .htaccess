@@ -1,0 +1,35 @@
+# Turn Rewrite Engine On
+RewriteEngine on
+
+# NC makes the rule non case sensitive
+# L makes this the last rule that this specific condition will match
+# $ in the regular expression makes the matching stop so that "customblah" will not work
+
+# Rewrite for index.php
+RewriteRule ^index/?$ index.php [NC,L]
+
+# Rewrite for about.php
+RewriteRule ^about about.php [NC,L]
+
+# Rewrite for preview.php
+RewriteRule ^preview/?$ preview.php [NC,L]
+
+# Rewrite for edit.php
+RewriteRule ^edit/?$ edit.php [NC,L]
+
+# Rewrite for preview.php?link=xxxxx
+RewriteRule ^preview/([0-9a-zA-Z]+)$ preview.php?link=$1 [NC,L]
+
+# Rewrite for capcha.php?link=xxxxx
+RewriteRule ^capcha/([0-9a-zA-Z]+)$ capcha.php?link=$1 [NC,L]
+
+# Rewrite for passcode.php?link=xxxxx
+RewriteRule ^passcode/([0-9a-zA-Z]+)$ passcode.php?link=$1 [NC,L]
+
+# Rewrite for edit.php?link=xxxxx
+RewriteRule ^edit/([0-9a-zA-Z]+)$ edit.php?link=$1 [NC,L]
+
+# Rewrite for index.php?link=xxxxx
+RewriteRule ^([0-9a-zA-Z]+)$ index.php?link=$1 [NC,L]
+
+

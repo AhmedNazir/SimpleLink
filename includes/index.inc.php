@@ -163,7 +163,7 @@
                 <div class="col-md-7 col-8  pl-0">
                     <input type="text" class="form-control" id="longurl" oninput="validSubmit()" name="link" value="<?php echo $url ?>" placeholder="Long URL">
                 </div>
-                <button type="submit" id="create" name="create" value="submit" class="col-md-2 col-4 btn btn-primary" disabled>Create</button>
+                <button type="submit" id="create" name="submit" value="submit" class="col-md-2 col-4 btn btn-primary" disabled>Create</button>
             </div>
 
             <div class="row mb-3">
