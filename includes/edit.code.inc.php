@@ -84,8 +84,20 @@ require_once "db.inc.php";
 
     <?php
 
+
+if (isset($_GET['error']) && $_GET['error'] == "wrongcode") {
+    echo '
+        <div class="alert alert-danger text-center" role="alert">
+        Edit Code is Wrong!!!
+        </div>
+        ';
+}
+
     if (!empty($_GET['link'])) {
         $shorturl = $_GET['link'];
+        $arr= explode("/",$shorturl);
+        $shorturl = end($arr);
+
         $query = "SELECT * FROM urls WHERE shorturl = '$shorturl';";
 
         $result = mysqli_query($conn, $query);

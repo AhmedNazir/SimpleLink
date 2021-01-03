@@ -75,6 +75,7 @@ session_start();
     $shorturl = "";
     if (isset($_GET['link']) && !empty($_GET['link'])) {
         $shorturl = $_GET['link'];
+
         header("location:includes/edit.code.inc.php?link=$shorturl");
         exit();
     }

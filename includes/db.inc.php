@@ -5,7 +5,7 @@
 // $dbUser = "epiz_25442413";
 // $dbPassword = "Yxv3FDREWwHLvj";
 // $dbName = "epiz_25442413_urlshortener";
-// $website =  "http://" . $_SERVER['SERVER_NAME'];
+// $website =  "http://" . $_SERVER['SERVER_NAME']."/";
 
 
 $dbHost = "localhost";
